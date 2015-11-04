@@ -5,10 +5,10 @@ use Getopt::Long;
 
 my $scarf_location; 
 #= "/afs/cs.wisc.edu/u/s/h/shreyakamath/Documents/SWAMP/SWAMP_Parser_Analysis/rawToScarf/java/PMD/JSPwiki/JSPWiki-2.5.139---rhel-6.4-64---pmd---justparse/";
-my $codedx_csv="output/report.csv";
-my $codedx_xml = "output/codedx.xml";
-my $diff_output = "output/diff_output";
-my $log_file = "output/JSPWiki-2.5.139---rhel-6.4-64---pmd.log";
+my $codedx_csv="../report.csv";
+my $codedx_xml = "../codedx.xml";
+my $diff_output = "../diff_output";
+my $log_file = "../JSPWiki-2.5.139---rhel-6.4-64---pmd.log";
 my $log;
 
 
@@ -32,13 +32,12 @@ sub parse_cmd_args{
 
 sub upload_and_download{
 	print $log localtime(time)." Starting upload of assessment\n";
-	#system("upload.sh $scarf_location");
+	system("upload.sh $scarf_location");
 	print $log localtime(time)." Upload to codedx complete\n";
-	#my $runId = $? >> 8;
-	my $runId = 10;
+	my $runId = $? >> 8;
 	print $log localtime(time)." Run ID of assessment is $runId\n";
 	print $log localtime(time)." Sleeping before downloading assessment	\n";
-	#sleep(10);
+	sleep(10);
 	print $log localtime(time)." Starting download of assessment \n";
 	system("download_report.sh -o $codedx_csv $runId");
 	print $log localtime(time)." Download of assessment from codedx complete\n";
